@@ -15,7 +15,9 @@ services:
             - ./pgdata:/var/lib/postgresql/data/pgdata
 
     webserver:
-        build: ./
+        build:
+          context: ./
+          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-{SQUASH_MATCH_BRANCH}-webserver
         restart: always
         depends_on:
             - postgres
@@ -54,7 +56,9 @@ services:
         command: flower
 
     scheduler:
-        build: ./
+        build:
+          context: ./
+          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-{SQUASH_MATCH_BRANCH}-scheduler
         restart: always
         depends_on:
             - webserver
@@ -73,7 +77,9 @@ services:
         command: scheduler
 
     worker:
-        build: ./
+        build:
+          context: ./
+          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-{SQUASH_MATCH_BRANCH}-worker
         restart: always
         depends_on:
             - scheduler
