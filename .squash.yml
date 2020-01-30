@@ -1,4 +1,4 @@
 deployments:
   netdata:
     filename: ./docker-compose-CeleryExecutor.yml
-    port_forwarding: 80:8080
+    port_forwarding: 8080:8080
