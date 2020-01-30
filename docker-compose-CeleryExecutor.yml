@@ -10,13 +10,12 @@ services:
             - POSTGRES_USER=airflow
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
-        # Uncomment these lines to persist data on the local filesystem.
-        #     - PGDATA=/var/lib/postgresql/data/pgdata
-        # volumes:
-        #     - ./pgdata:/var/lib/postgresql/data/pgdata
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data/pgdata
 
     webserver:
-        image: puckel/docker-airflow:1.10.7
+        build: ./
         restart: always
         depends_on:
             - postgres
@@ -25,9 +24,9 @@ services:
             - LOAD_EX=n
             - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             - EXECUTOR=Celery
-            # - POSTGRES_USER=airflow
-            # - POSTGRES_PASSWORD=airflow
-            # - POSTGRES_DB=airflow
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
             # - REDIS_PASSWORD=redispass
         volumes:
             - ./dags:/usr/local/airflow/dags
@@ -55,7 +54,7 @@ services:
         command: flower
 
     scheduler:
-        image: puckel/docker-airflow:1.10.7
+        build: ./
         restart: always
         depends_on:
             - webserver
@@ -67,14 +66,14 @@ services:
             - LOAD_EX=n
             - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             - EXECUTOR=Celery
-            # - POSTGRES_USER=airflow
-            # - POSTGRES_PASSWORD=airflow
-            # - POSTGRES_DB=airflow
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
             # - REDIS_PASSWORD=redispass
         command: scheduler
 
     worker:
-        image: puckel/docker-airflow:1.10.7
+        build: ./
         restart: always
         depends_on:
             - scheduler
@@ -85,8 +84,8 @@ services:
         environment:
             - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             - EXECUTOR=Celery
-            # - POSTGRES_USER=airflow
-            # - POSTGRES_PASSWORD=airflow
-            # - POSTGRES_DB=airflow
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
             # - REDIS_PASSWORD=redispass
         command: worker
