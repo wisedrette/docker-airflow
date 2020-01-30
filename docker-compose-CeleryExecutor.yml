@@ -17,7 +17,7 @@ services:
     webserver:
         build:
           context: ./
-          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-{SQUASH_MATCH_BRANCH}-webserver
+          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-squash-webserver
         restart: always
         depends_on:
             - postgres
@@ -58,7 +58,7 @@ services:
     scheduler:
         build:
           context: ./
-          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-{SQUASH_MATCH_BRANCH}-scheduler
+          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-squash-scheduler
         restart: always
         depends_on:
             - webserver
@@ -79,7 +79,7 @@ services:
     worker:
         build:
           context: ./
-          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-{SQUASH_MATCH_BRANCH}-worker
+          cache_from: ${SQUASH_REGISTRY}:docker-airflow-netdata-squash-worker
         restart: always
         depends_on:
             - scheduler
