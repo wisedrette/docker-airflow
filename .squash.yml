@@ -1,4 +1,4 @@
 deployments:
-  netdata:
+  airflow:
     filename: ./docker-compose-CeleryExecutor.yml
     port_forwarding: 8080:8080
