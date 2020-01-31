@@ -18,7 +18,7 @@ services:
         build:
           context: ./
           cache_from:
-            - puckel/docker-airflow:1.10.7
+            - ${SQUASH_REGISTRY}:docker-airflow-airflow-squash-webserver
         restart: always
         depends_on:
             - postgres
@@ -60,7 +60,7 @@ services:
         build:
           context: ./
           cache_from:
-            - puckel/docker-airflow:1.10.7
+            - ${SQUASH_REGISTRY}:docker-airflow-airflow-squash-scheduler
         restart: always
         depends_on:
             - webserver
@@ -82,7 +82,7 @@ services:
         build:
           context: ./
           cache_from:
-            - puckel/docker-airflow:1.10.7
+            - ${SQUASH_REGISTRY}:docker-airflow-airflow-squash-worker
         restart: always
         depends_on:
             - scheduler
