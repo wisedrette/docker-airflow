@@ -17,6 +17,8 @@ services:
     webserver:
         build:
           context: ./
+          cache_from:
+            - 647235742709.dkr.ecr.us-east-1.amazonaws.com/github/wisedrette:docker-airflow-airflow-squash-webserver
         restart: always
         depends_on:
             - postgres
