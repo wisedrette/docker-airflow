@@ -18,7 +18,7 @@ services:
         build:
           context: ./
           cache_from: 
-            - 647235742709.dkr.ecr.us-east-1.amazonaws.com/github/wisedrette:docker-airflow-netdata-squash-webserver
+            - 647235742709.dkr.ecr.us-east-1.amazonaws.com/github/wisedrette:docker-airflow-airflow-squash-webserver
         restart: always
         depends_on:
             - postgres
@@ -60,7 +60,7 @@ services:
         build:
           context: ./
           cache_from: 
-            - 647235742709.dkr.ecr.us-east-1.amazonaws.com/github/wisedrette:docker-airflow-netdata-squash-scheduler
+            - 647235742709.dkr.ecr.us-east-1.amazonaws.com/github/wisedrette:docker-airflow-airflow-squash-scheduler
         restart: always
         depends_on:
             - webserver
@@ -82,7 +82,7 @@ services:
         build:
           context: ./
           cache_from: 
-            - 647235742709.dkr.ecr.us-east-1.amazonaws.com/github/wisedrette:docker-airflow-netdata-squash-worker
+            - 647235742709.dkr.ecr.us-east-1.amazonaws.com/github/wisedrette:docker-airflow-airflow-squash-worker
         restart: always
         depends_on:
             - scheduler
